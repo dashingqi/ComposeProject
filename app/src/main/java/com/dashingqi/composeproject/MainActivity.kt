@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-           var list = arrayListOf<String>("DashingQi","XHY","GY","Hello GY")
+            var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
             Feed(list)
         }
     }
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun Feed(feedItems: List<String>) {
-        ScrollableColumn(Modifier.fillMaxSize()) {
+        ScrollableRow(Modifier.wrapContentHeight().fillMaxWidth()) {
             feedItems.forEach {
                 artistCard(it)
             }
