@@ -3,6 +3,7 @@ package com.dashingqi.composeproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -22,16 +23,17 @@ import androidx.compose.ui.unit.sp
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            artistCard()
+           var list = arrayListOf<String>("DashingQi","XHY","GY","Hello GY")
+            Feed(list)
         }
     }
 
 
     @Preview
     @Composable
-    fun artistCard() {
-
+    fun artistCard(name: String) {
         val padding = 16.dp
         //图片
         val headerImg = imageResource(id = R.drawable.ic)
@@ -60,17 +62,15 @@ class MainActivity : AppCompatActivity() {
                     modifier = headerModifier,
                     contentScale = ContentScale.Crop
                 )
-
                 //加入间距
                 Spacer(Modifier.preferredSize(8.dp))
 
                 Column(horizontalAlignment = Alignment.Start) {
-                    Text("DashingQi", color = Color.Blue, fontSize = 15.sp)
+                    Text(name, color = Color.Blue, fontSize = 15.sp)
                     Spacer(Modifier.preferredSize(4.dp))
                     Text("3 minutes ago", color = Color.Black, fontSize = 12.sp)
                 }
             }
-
             Spacer(Modifier.preferredSize(padding))
 
             // 卡片的布局
@@ -81,7 +81,15 @@ class MainActivity : AppCompatActivity() {
                     contentScale = ContentScale.Crop
                 )
             }
+        }
+    }
 
+    @Composable
+    fun Feed(feedItems: List<String>) {
+        ScrollableColumn(Modifier.fillMaxSize()) {
+            feedItems.forEach {
+                artistCard(it)
+            }
         }
     }
 
