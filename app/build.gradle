@@ -8,6 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.dashingqi.composeproject"
+        // 您需要将应用的最低 API 级别设置为 21 或更高级别
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -30,11 +31,14 @@ android {
         jvmTarget = '1.8'
         useIR = true
     }
+    //开启compose
     buildFeatures {
-        // Enables Jetpack Compose for this module
+
         compose true
     }
 
+
+    // 设置 Kotlin 编译器插件的版本
     composeOptions {
         kotlinCompilerVersion '1.4.21'
         kotlinCompilerExtensionVersion '1.0.0-alpha10'
@@ -51,6 +55,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // =================== 在项目中引入compose的开发工具包 ===========================
 
     implementation 'androidx.compose.ui:ui:1.0.0-alpha10'
     // Tooling support (Previews, etc.)
