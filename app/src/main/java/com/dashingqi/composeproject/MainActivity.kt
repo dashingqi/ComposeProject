@@ -14,6 +14,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,8 +25,11 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -108,9 +112,11 @@ class MainActivity : AppCompatActivity() {
     /**
      * Scaffold使用Demo
      */
+    @ExperimentalMaterialApi
     @Composable
     fun ScaffoldDemo() {
         val scaffoldState = rememberScaffoldState()
+        val scope = rememberCoroutineScope()
         Scaffold(
             scaffoldState = scaffoldState,
 
@@ -131,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
             //悬浮按钮
             floatingActionButton = {
-                floatingButtonFun()
+                floatingButtonFun(scope, scaffoldState)
             },
 
             //悬浮按钮的位置
@@ -173,7 +179,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun bodyContentFun() {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            var list = arrayListOf<String>("DashingQi", "XHY", "HaHaHa", "HeiHeiHei")
+            var list = arrayListOf<String>("DashingQi", "XHY", "HaHaHa", "HeiHeiHei", "DashingQi")
             //Text(text = "屏幕内容绘制区域")
             Feed(list)
         }
@@ -182,10 +188,15 @@ class MainActivity : AppCompatActivity() {
     /**
      * 悬浮按钮
      */
+    @ExperimentalMaterialApi
     @Composable
-    private fun floatingButtonFun() {
+    private fun floatingButtonFun(scope: CoroutineScope, state: ScaffoldState) {
         ExtendedFloatingActionButton(
             text = { Text("悬浮按钮") },
-            onClick = { Toast.makeText(this, "hello", Toast.LENGTH_LONG).show() })
+            onClick = {
+                scope.launch {
+                    state.snackbarHostState.showSnackbar(message = "点击了悬浮按钮")
+                }
+            })
     }
 }
