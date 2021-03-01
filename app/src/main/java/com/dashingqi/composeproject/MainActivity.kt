@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,8 +27,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
-            Feed(list)
+            //var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
+           // Feed(list)
+
+            homeScreen()
         }
     }
 
@@ -101,5 +101,26 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    /**
+     * Material组件的练习使用
+     */
+    @Composable
+    fun material() {
+
+    }
+
+    /**
+     * 首页
+     */
+    @Composable
+    fun homeScreen() {
+        Scaffold(
+            drawerContent = { Text("this is content") },
+            topBar = {
+                TopAppBar(title = { Text("this is title") })
+            }
+        ) {}
     }
 }

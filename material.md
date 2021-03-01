@@ -25,11 +25,11 @@ https://developer.android.google.cn/jetpack/compose/mental-model?authuser=0
 
 - 横向滚动
 ScrollableRow
-LazyRowFor：适合用于大数据量
+LazyRowFor：适合用于大数据量，仅仅展示屏幕上可见的部分
 
 - 垂直滚动
 ScrollableColumn
-LazyColumnFor:适合用于大数据量
+LazyColumnFor:适合用于大数据量，仅仅展示屏幕上可见的部分
 ```
     Surface(Modifier.fillMaxSize()) {
             LazyColumnFor(feedItems) { item ->
@@ -38,3 +38,7 @@ LazyColumnFor:适合用于大数据量
             }
         }
 ```
+
+#### Material
+
+Material 支持的最高级别的可组合项是 Scaffold
