@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     private fun bodyContentFun() {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
+            var list = arrayListOf<String>("DashingQi", "XHY", "HaHaHa", "HeiHeiHei")
             //Text(text = "屏幕内容绘制区域")
             Feed(list)
         }
