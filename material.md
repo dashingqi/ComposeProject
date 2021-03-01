@@ -20,3 +20,21 @@ https://developer.android.google.cn/jetpack/compose/mental-model?authuser=0
 ###### 修饰符
 
 - Modifier
+
+###### 布局的滚动
+
+- 横向滚动
+ScrollableRow
+LazyRowFor：适合用于大数据量
+
+- 垂直滚动
+ScrollableColumn
+LazyColumnFor:适合用于大数据量
+```
+    Surface(Modifier.fillMaxSize()) {
+            LazyColumnFor(feedItems) { item ->
+                artistCard(item)
+
+            }
+        }
+```
