@@ -2,6 +2,7 @@ package com.dashingqi.composeproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
@@ -10,6 +11,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,11 +29,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            //var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
-           // Feed(list)
 
-            homeScreen()
+        setContent {
+            ScaffoldDemo()
         }
     }
 
@@ -103,24 +104,88 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     /**
-     * Material组件的练习使用
+     * Scaffold使用Demo
      */
     @Composable
-    fun material() {
+    fun ScaffoldDemo() {
+        val scaffoldState = rememberScaffoldState()
+        Scaffold(
+            scaffoldState = scaffoldState,
 
+            //抽屉控件的你内容绘制
+            drawerContent = {
+                drawerContentFun()
+            },
+
+            //顶部标题栏
+            topBar = {
+                topAppBarFun(scaffoldState)
+            },
+
+            //屏幕内容绘制
+            bodyContent = {
+                bodyContentFun()
+            },
+
+            //悬浮按钮
+            floatingActionButton = {
+                floatingButtonFun()
+            },
+
+            //悬浮按钮的位置
+            floatingActionButtonPosition = FabPosition.End
+        )
     }
 
     /**
-     * 首页
+     * 顶部标题栏
      */
     @Composable
-    fun homeScreen() {
-        Scaffold(
-            drawerContent = { Text("this is content") },
-            topBar = {
-                TopAppBar(title = { Text("this is title") })
+    private fun topAppBarFun(scaffoldState: ScaffoldState) {
+        TopAppBar(
+            title = { Text("这是脚手架项目") },
+            navigationIcon = {
+                IconButton(onClick = { scaffoldState.drawerState.open() }) {
+                    Icon(imageVector = Icons.Filled.Menu)
+                }
             }
-        ) {}
+        )
+    }
+
+    /**
+     * 抽屉内容
+     */
+    @Composable
+    private fun drawerContentFun() {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "抽屉组件中的内容")
+        }
+    }
+
+    /**
+     * 屏幕绘制内容
+     */
+    @Composable
+    private fun bodyContentFun() {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            var list = arrayListOf<String>("DashingQi", "XHY", "GY", "Hello GY")
+            //Text(text = "屏幕内容绘制区域")
+            Feed(list)
+        }
+    }
+
+    /**
+     * 悬浮按钮
+     */
+    @Composable
+    private fun floatingButtonFun() {
+        ExtendedFloatingActionButton(
+            text = { Text("悬浮按钮") },
+            onClick = { Toast.makeText(this, "hello", Toast.LENGTH_LONG).show() })
     }
 }
