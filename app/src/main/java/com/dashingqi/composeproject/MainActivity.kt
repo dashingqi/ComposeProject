@@ -6,8 +6,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -87,9 +90,15 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun Feed(feedItems: List<String>) {
-        ScrollableRow(Modifier.wrapContentHeight().fillMaxWidth()) {
-            feedItems.forEach {
-                artistCard(it)
+//        ScrollableRow(Modifier.wrapContentHeight().fillMaxWidth()) {
+//            feedItems.forEach {
+//                artistCard(it)
+//            }
+//        }
+        Surface(Modifier.fillMaxSize()) {
+            LazyColumnFor(feedItems) { item ->
+                artistCard(item)
+
             }
         }
     }
