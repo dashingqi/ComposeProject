@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContent {
             ScaffoldDemo()
         }
@@ -47,6 +45,7 @@ class MainActivity : AppCompatActivity() {
      * Scaffold使用Demo
      */
     @ExperimentalMaterialApi
+    @Preview
     @Composable
     fun ScaffoldDemo() {
         val scaffoldState = rememberScaffoldState()
@@ -104,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             contentAlignment = Alignment.Center
         ) {
             Text(text = "抽屉组件中的内容")
+            Text(text = "heiheiheihei")
         }
     }
 
